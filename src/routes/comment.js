@@ -26,7 +26,7 @@ router.post('/deleteComment', async function (req, res, next) {
       if (err) {
         next(err)
       }
-      connection.query('call comments_delete(' + req.body.postId + ',' + '"' + req.body.userId + '"' + ',' + '"' + req.body.commentId + '"' + ')', function (err, result) {
+      connection.query('call comment_delete(' + '"' + req.body.commentId + '"' + ')', function (err, result) {
         connection.release();
         if (err) {
           next(err);

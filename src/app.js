@@ -14,9 +14,9 @@ const {
   buildStatus
 } = require('./utils/helper')
 
-app.use(bodyParser);
+app.use(bodyParser({ extended: false }));
 app.use(cors(config.cors));
-app.use(helmet);
+app.use(helmet());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
