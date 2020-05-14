@@ -1,4 +1,4 @@
-const { localConfig } = require("../configuration/config");
+const { dbConfig } = require("../environment/environment.ts");
 var mysql = require('mysql');
 module.exports.buildStatus = (res, status, data) => {
   res.status(status).send(data)
@@ -8,6 +8,10 @@ module.exports.buildError = (status, error) => {
   const err = new Error(error)
   err.status = status
   return err
+}
+// build Status
+module.exports.buildStatus = (res, status, data) => {
+  res.status(status).send(data)
 }
 
 
@@ -21,6 +25,6 @@ module.exports.HTTPCodes = {
 }
 
 module.exports.connection = async () => {
-  const pool = await new mysql.createPool(localConfig)
+  const pool = await new mysql.createPool(dbConfig)
   return pool
 }

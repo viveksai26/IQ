@@ -1,16 +1,22 @@
 const {
   Router
-} = require('express')
+} = require('express');
 const router = Router()
+
+const {
+  Validation
+} = require('../utils/validation');
 
 const {
   buildStatus,
   HTTPCodes
-} = require('../utils/helper')
+} = require('../utils/helper');
 
 const {
   connection
-} = require('../utils/helper')
+} = require('../utils/helper');
+
+// router.use(Validation.comment)
 
 router.post('/deleteComment', async function (req, res, next) {
   let pool;
