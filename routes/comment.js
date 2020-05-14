@@ -20,7 +20,7 @@ router.post('/deleteComment', async function (req, res, next) {
       if (err) {
         next(err)
       }
-      connection.query('call deleteComment(' + req.body.postId + ',' + '"' + req.body.userId + '"' + ',' + '"' + req.body.commentId + '"' + ')', function (err, result) {
+      connection.query('call comments_delete(' + req.body.postId + ',' + '"' + req.body.userId + '"' + ',' + '"' + req.body.commentId + '"' + ')', function (err, result) {
         connection.release();
         if (err) {
           next(err);
@@ -51,7 +51,7 @@ router.post('/insertComment', async function (req, res, next) {
       if (err) {
         next(err)
       }
-      connection.query('call add_comments(' + req.body.userId + ',' + '"' + req.body.questionId + '"' + ',' + '"' + req.body.comment + '"' + ')', function (err, result) {
+      connection.query('call comments_add(' + req.body.userId + ',' + '"' + req.body.questionId + '"' + ',' + '"' + req.body.comment + '"' + ')', function (err, result) {
         connection.release();
         if (err) {
           next(err)
@@ -82,7 +82,7 @@ router.post('/getComments', async function (req, res, next) {
       if (err) {
         next(err)
       }
-      connection.query('call get_latest_comments(' + req.body.questionId + ',' + '"' + req.body.time + '"' + ')', function (err, result) {
+      connection.query('call comments_get(' + req.body.questionId + ',' + '"' + req.body.time + '"' + ')', function (err, result) {
         connection.release();
         if (err) {
           next(err)
