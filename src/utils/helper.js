@@ -28,3 +28,9 @@ module.exports.connection = async () => {
   const pool = await new mysql.createPool(dbConfig)
   return pool
 }
+
+module.exports.signIn = async function () {
+  return await jwt.sign({
+    data: 'foobar'
+  }, 'secret', { expiresIn: '1h' });
+}

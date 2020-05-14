@@ -3,12 +3,6 @@ const {
 } = require('express')
 const router = Router()
 
-config = {
-    host: 'localhost',
-    user: 'root',
-    database: 'rnapp'
-};
-
 const {
     buildStatus,
     HTTPCodes
@@ -22,7 +16,7 @@ const {
 router.post('/getQuestions', async function (req, res, next) {
     let pool;
     try {
-        pool = await connection(config)
+        pool = await connection()
         pool.getConnection(function (err, connection) {
             if (err) {
                 next(err)

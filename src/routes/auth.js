@@ -4,12 +4,53 @@ const {
 const router = Router()
 
 const {
-    Auth
-} = require('../utils/authentication');
-const {
     Validation
-} = require('../utils/validation')
+} = require('../utils/validation');
 
-router.post('/login', Validation.Auth, Auth.login);
+const {
+    buildStatus,
+    HTTPCodes
+} = require('../utils/helper');
 
-module.exports = Router;
+const {
+    connection
+} = require('../utils/helper');
+
+const Auth = require('../utils/authentication');
+
+// router.use(Validation.comment)
+
+router.post('/getComments', async function (req, res, next) {
+    let pool;
+    try {
+        pool = await connection(config)
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                next(err)
+            }
+            connection.query('call comments_get(' + req.body.questionId + ',' + '"' + req.body.time + '"' + ')', function (err, result) {
+                connection.release();
+                if (err) {
+                    next(err)
+                    return
+                }
+                try {
+                    buildStatus(res, HTTPCodes.SUCCESS, result)
+                } catch (err) {
+                    next(err)
+                }
+
+            })
+            connection.on('error', function (error) {
+                next(error)
+            })
+        })
+    } catch (err) {
+        next(err)
+    }
+
+})
+router.post('/getToken', async Auth.login)
+
+
+module.exports = router

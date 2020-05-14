@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node .src/bin/www",
+    "start": "node ./src/bin/www",
     "debug": "set DEBUG=app:* & node ./src/bin/www",
     "nodemon": "set DEBUG=app:* & nodemon ./src/bin/www",
     "prod": "set NODE_ENV=production && node ./src/bin/www"
