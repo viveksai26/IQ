@@ -1,5 +1,10 @@
-const { dbConfig } = require("../environment/environment.ts");
+const { dbConfig } = require("../environment/environment.js");
+const {
+  config
+} = require('../config/configuration')
+var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
+var debug = require('debug')('app:helper')
 module.exports.buildStatus = (res, status, data) => {
   res.status(status).send(data)
 }
@@ -29,8 +34,18 @@ module.exports.connection = async () => {
   return pool
 }
 
-module.exports.signIn = async function () {
+module.exports.getToken = async function (username = 'default', password = 'default') {
   return await jwt.sign({
-    data: 'foobar'
-  }, 'secret', { expiresIn: '1h' });
+    data: {
+      username: username,
+      password: password
+    }
+  }, config.secret, { expiresIn: '100d' });
+}
+module.exports.verifyToken = async function (token, next) {
+  try {
+    return await jwt.verify(token, config.secret);
+  } catch (err) {
+    next(err);
+  }
 }
