@@ -6,8 +6,7 @@
     "start": "node ./src/bin/www",
     "debug": "set DEBUG=app:* & node ./src/bin/www",
     "nodemon": "set DEBUG=app:* & nodemon ./src/bin/www",
-    "prod": "set NODE_ENV=production && node ./src/bin/www",
-    "test": "./node_modules/.bin/mocha tests/**/*.spec.js"
+    "prod": "set NODE_ENV=production && node ./src/bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
