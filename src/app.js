@@ -14,7 +14,7 @@ const {
   buildStatus
 } = require('./utils/helper')
 
-app.use(bodyParser({ extended: false }));
+app.use(bodyParser({ limit: '5mb', extended: false }));
 app.use(cors(config.cors));
 app.use(helmet());
 // view engine setup

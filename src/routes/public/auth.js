@@ -14,8 +14,6 @@ const {
 
 const Auth = require('../../utils/authentication');
 
-router.get('/getToken', Auth.getToken)
-
 router.get('/validateToken', Auth.validateToken, async function (req, res, next) {
     try {
         buildStatus(res, HTTPCodes.SUCCESS, 'SUCCESS');

@@ -34,13 +34,16 @@ module.exports.connection = async () => {
   return pool
 }
 
-module.exports.getToken = async function (username = 'default', password = 'default') {
-  return await jwt.sign({
-    data: {
-      username: username,
-      password: password
-    }
-  }, config.secret, { expiresIn: '100d' });
+module.exports.getToken = async function (req, res, next) {
+  try {
+    return await jwt.sign({
+      data: {
+        userId: req.body.userId,
+      }
+    }, config.secret, { expiresIn: '100d' });
+  } catch (err) {
+    next(err);
+  }
 }
 module.exports.verifyToken = async function (token, next) {
   try {
