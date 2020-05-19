@@ -31,8 +31,11 @@ router.post('/login', async function (req, res, next) {
                         return
                     }
                     try {
+                        console.log(result);
+
                         if (result[0][0]['user_id']) {
                             req.body.userId = result[0][0]['user_id'];
+                            req.body.username = result[0][0]['username'];
                             const token = await getToken(req, res, next);
                             buildStatus(res, HTTPCodes.SUCCESS, token)
                         }
